@@ -42,7 +42,7 @@ func main() {
 		log.Println("データベース接続を閉じます...")
 		db.Close()
 	}()
-	pollData := db.DB("ballots").C("idle")
+	pollData := db.DB("ballots").C("polls")
 
 	var counts map[string]int
 	var countsLock sync.Mutex
