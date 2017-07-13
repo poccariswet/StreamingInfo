@@ -33,10 +33,10 @@ $ go build -o api
 $ ./api
 ```
 
-[7] build **web** and starting in web folder
+[7] build **public** and starting in public folder
 ```sh
-$ go build -o web
-$ ./web
+$ go build -o public
+$ ./public
 ```
 <br>
 
