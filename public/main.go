@@ -1,6 +1,10 @@
 package main
 
-import ()
+import (
+	"flag"
+	"log"
+	"net/http"
+)
 
 func main() {
 	var addr = flag.String("addr", ":8081", "webアドレス")
