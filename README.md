@@ -39,6 +39,7 @@ $ go build -o web
 $ ./web
 ```
 <br>
+
 connect **nsq** and output all specific topic you set
 ```sh
 $ nsq_tail --topic="votes" --lookupd-http-address=localhost:4161
