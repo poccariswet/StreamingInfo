@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	mgo "gopkg.in/mgo.v2"
@@ -36,6 +37,7 @@ func handlePolls(w http.ResponseWriter, r *http.Request) {
 
 // GET method
 func handlePollsGet(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
 	db := GetVar(r, "db").(*mgo.Database)
 	c := db.C("polls")
 	var q *mgo.Query
@@ -57,6 +59,7 @@ func handlePollsGet(w http.ResponseWriter, r *http.Request) {
 
 // POST method
 func handlePollsPost(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
 	db := GetVar(r, "db").(*mgo.Database)
 	c := db.C("polls")
 	var p poll
@@ -64,7 +67,7 @@ func handlePollsPost(w http.ResponseWriter, r *http.Request) {
 		respondErr(w, r, http.StatusBadRequest, "リクエストから調査項目の読み込みエラー: ", err)
 		return
 	}
-	p.ID = bson.NewObjectID()
+	p.ID = bson.NewObjectId()
 	if err := c.Insert(p); err != nil {
 		respondErr(w, r, http.StatusInternalServerError, "調査項目の格納エラー: ", err)
 		return
@@ -74,6 +77,7 @@ func handlePollsPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func handlePollsDelete(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
 	db := GetVar(r, "db").(*mgo.Database)
 	c := db.C("polls")
 	p := NewPath(r.URL.Path)
@@ -81,7 +85,7 @@ func handlePollsDelete(w http.ResponseWriter, r *http.Request) {
 		respondErr(w, r, http.StatusMethodNotAllowed, "全ての調査項目は削除できません")
 		return
 	}
-	if err := c.RemovedId(bson.ObjectIdHex(p.ID)); err != nil {
+	if err := c.RemoveId(bson.ObjectIdHex(p.ID)); err != nil {
 		respondErr(w, r, http.StatusInternalServerError, "調査項目の削除失敗: ", err)
 		return
 	}
