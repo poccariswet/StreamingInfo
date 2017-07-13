@@ -1,6 +1,9 @@
 package main
 
-import ()
+import (
+	"net/http"
+	"sync"
+)
 
 var (
 	varsLock sync.RWMutex
