@@ -21,7 +21,7 @@ For example
 
 ```sh
 > use ballots
-> db.polls.insert({title:"My poll",options:["one","two","three"]})
+> db.polls.insert({"title":"My poll","options":["one","two","three"]})
 ```
 
 After a while, see the results by printing the polls:
